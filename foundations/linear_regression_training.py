@@ -23,12 +23,15 @@ class Solution:
         #   1. Compute predictions with get_model_prediction(X, weights)
         for i in range(num_iterations):
             Y_pred=self.get_model_prediction(X,initial_weights)
-            derivative_MSE=np.zeros(len(initial_weights))
+
         #   2. For each weight index j, compute gradient with get_derivative()
+            gradient=np.zeros(len(initial_weights))
             for j in range(len(initial_weights)):
-                derivative_MSE[j]=self.get_derivative(Y_pred,Y,len(X),X,j)
+                gradient[j]=self.get_derivative(Y_pred,Y,len(X),X,j)
+
         #   3. Update: weights[j] -= learning_rate * gradient
-            initial_weights=initial_weights-self.learning_rate*derivative_MSE
         
-        return np.round(initial_weights,5)
+            initial_weights=initial_weights-self.learning_rate*gradient
+        
+        return np.round(initial_weights, 5)
         
